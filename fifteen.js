@@ -34,7 +34,7 @@ var init = function () {
 
 
         div.onmouseover = function(){
-			if (checkMovable(this)){
+			if (isMovable(this)){
                 this.style.border = "3px solid red";
                 this.style.color = "#006600";
                 this.style.textDecoration = "underline";
@@ -56,7 +56,7 @@ var whitePiece = {
 };
 
 function move() {
-    if (checkMovable(this)) {
+    if (isMovable(this)) {
         this.style.left = (parseInt(this.style.left) + -1 * (this.x - whitePiece.row)) + "px";
         this.style.top = (parseInt(this.style.top) + -1 * (this.y - whitePiece.col)) + "px";
         whitePiece.row = this.x;
@@ -66,7 +66,7 @@ function move() {
     }
 }
 
-function checkMovable(piece) {
+function isMovable(piece) {
     if (Math.abs(piece.x - whitePiece.row) == 100 && Math.abs(piece.y - whitePiece.col) == 0 ||
         Math.abs(piece.y - whitePiece.col) == 100 && Math.abs(piece.x - whitePiece.row) == 0)
         return true;
