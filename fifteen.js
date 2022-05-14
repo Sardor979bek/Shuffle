@@ -1,12 +1,12 @@
-$(document).ready(function () {row
+$(document).ready(function () {
+    row
     init();
     $("#shufflebutton").on("click", shuffleDivs);
- });
+});
 
-var positionArray = [];
-
-var row = 300; 
-var	col = 300;
+var posArray = [];
+var row = 300;
+var col = 300;
 
 var init = function () {
 
@@ -33,29 +33,28 @@ var init = function () {
             y: y,
             bgP: div.style.backgroundPosition
         };
-        positionArray.push(point);
+        posArray.push(point);
+
+        div.onmouseout = function () {
+            this.style.border = "2px solid black";
+            this.style.color = "#000000";
+            this.style.textDecoration = "none";
+        };
 
 
-        div.onmouseover = function(){
-			if (isMovable(this)){
+        div.onmouseover = function () {
+            if (isMovable(this)) {
                 this.style.border = "3px solid red";
                 this.style.color = "#006600";
                 this.style.textDecoration = "underline";
-			}
-		}
-
-        div.onmouseout = function(){
-			this.style.border = "2px solid black"; 
-			this.style.color = "#000000"; 
-			this.style.textDecoration = "none";
-		};
-
-        div.onclick = move
+            }
+        }
+        div.onclick = moveDiv
     }
 };
 
 
-function move() {
+function moveDiv() {
     if (isMovable(this)) {
         this.style.left = (parseInt(this.style.left) + -1 * (this.x - row)) + "px";
         this.style.top = (parseInt(this.style.top) + -1 * (this.y - col)) + "px";
@@ -75,13 +74,13 @@ function isMovable(piece) {
 
 var shuffleDivs = function () {
 
-    var divs =  $("#puzzlearea").children('div');
+    var divs = $("#puzzlearea").children('div');
 
     $("#puzzlearea").children('div').each(function (key, element) {
         $(element).detach();
     });
 
-    var shuffledArray = shuffleArray(positionArray);
+    var shuffledArray = shuffleArray(posArray);
     for (var i = 0; i < divs.length; i++) {
         var item = divs[i];
         item.x = shuffledArray[i].x;
