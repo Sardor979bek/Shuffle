@@ -1,9 +1,12 @@
-$(document).ready(function () {
+$(document).ready(function () {row
     init();
-    $("#shufflebutton").on("click", shuffle);
+    $("#shufflebutton").on("click", shuffleDivs);
  });
 
 var positionArray = [];
+
+var row = 300; 
+var	col = 300;
 
 var init = function () {
 
@@ -50,30 +53,27 @@ var init = function () {
         div.onclick = move
     }
 };
-var whitePiece = {
-    row: 300,
-    col: 300
-};
+
 
 function move() {
     if (isMovable(this)) {
-        this.style.left = (parseInt(this.style.left) + -1 * (this.x - whitePiece.row)) + "px";
-        this.style.top = (parseInt(this.style.top) + -1 * (this.y - whitePiece.col)) + "px";
-        whitePiece.row = this.x;
-        whitePiece.col = this.y;
+        this.style.left = (parseInt(this.style.left) + -1 * (this.x - row)) + "px";
+        this.style.top = (parseInt(this.style.top) + -1 * (this.y - col)) + "px";
+        row = this.x;
+        col = this.y;
         this.x = parseInt(this.style.left);
         this.y = parseInt(this.style.top);
     }
 }
 
 function isMovable(piece) {
-    if (Math.abs(piece.x - whitePiece.row) == 100 && Math.abs(piece.y - whitePiece.col) == 0 ||
-        Math.abs(piece.y - whitePiece.col) == 100 && Math.abs(piece.x - whitePiece.row) == 0)
+    if (Math.abs(piece.x - row) == 100 && Math.abs(piece.y - col) == 0 ||
+        Math.abs(piece.y - col) == 100 && Math.abs(piece.x - row) == 0)
         return true;
     return false;
 }
 
-var shuffle = function () {
+var shuffleDivs = function () {
 
     var divs =  $("#puzzlearea").children('div');
 
@@ -92,8 +92,8 @@ var shuffle = function () {
         $("#puzzlearea").append(item);
     }
 
-    whitePiece.row = 300
-    whitePiece.col = 300
+    row = 300
+    col = 300
 }
 
 var shuffleArray = function (arr) {
