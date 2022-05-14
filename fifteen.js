@@ -35,20 +35,17 @@ var init = function () {
         };
         posArray.push(point);
 
+        div.onmouseover = function () {
+            if (isMovable(this)) {
+                this.style.border = "4px solid red";
+                this.style.color = "#006600";
+            }
+        }
         div.onmouseout = function () {
             this.style.border = "2px solid black";
             this.style.color = "#000000";
-            this.style.textDecoration = "none";
         };
-
-
-        div.onmouseover = function () {
-            if (isMovable(this)) {
-                this.style.border = "3px solid red";
-                this.style.color = "#006600";
-                this.style.textDecoration = "underline";
-            }
-        }
+        
         div.onclick = moveDiv
     }
 };
